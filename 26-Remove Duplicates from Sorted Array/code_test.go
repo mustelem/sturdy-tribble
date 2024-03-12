@@ -17,35 +17,35 @@ func Test_removeDuplicates(t *testing.T) {
 				nums: []int{1, 1},
 			},
 			want: 1,
-		},
-		{
+		}, {
 			name: "two vals",
 			args: args{
 				nums: []int{1, 2},
 			},
 			want: 2,
-		},
-		{
+		}, {
 			name: "happy",
 			args: args{
 				nums: []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4},
 			},
 			want: 5,
-		},
-		{
+		}, {
 			name: "empty array",
 			args: args{
 				nums: []int{},
 			},
 			want: 0,
-		},
-		{name: "some",
+		}, {name: "some",
 			args: args{
 				nums: []int{1, 1, 2},
 			},
 			want: 2,
+		}, {name: "single val",
+			args: args{
+				nums: []int{-9},
+			},
+			want: 1,
 		},
-		{},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
