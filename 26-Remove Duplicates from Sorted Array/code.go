@@ -8,7 +8,8 @@ func main() {
 	// nums := []int{1, 1, 2}
 	// nums := []int{1, 1}
 
-	fmt.Println(removeDuplicates(nums))
+	newNums := removeDuplicates(nums)
+	fmt.Println(newNums)
 }
 
 func walkArray(nums []int, index int) []int {
@@ -16,33 +17,33 @@ func walkArray(nums []int, index int) []int {
 		nums[i] = nums[i+1]
 	}
 
+	nums[len(nums)-1] = -999
+
 	return nums
 }
 
 func removeDuplicates(nums []int) int {
-	var retVal int = len(nums)
+	var count int = 0
 
-	last := nums[len(nums)-1]
+	if len(nums) == 0 {
+		return 0
+	}
 
-	for i := 0; i < len(nums); i++ {
-		if nums[i] == last {
-			retVal = i + 1
-			break
-		}
+	if len(nums) == 1 {
+		return 1
+	}
 
-		if i == 0 {
-			continue
-		}
-
+	for i := 1; i < len(nums); i++ {
 		for nums[i] == nums[i-1] {
 			nums = walkArray(nums, i)
 		}
 
-		if nums[i] == last {
-			retVal = i + 1
-			break
+		if nums[i] < nums[i-1] {
+			return i
 		}
+
+		count = i + 1
 	}
 
-	return retVal
+	return count
 }
