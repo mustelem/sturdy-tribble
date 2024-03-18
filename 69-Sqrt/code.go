@@ -1,15 +1,25 @@
 package main
 
-import "math"
-
 func mySqrt(x int) int {
-	var result int
-	i := 0
+	if x == 1 {
+		return 1
+	}
+	var lB, rB int
 
-	for math.Pow(float64(i), 2) <= float64(x) {
-		result = i
-		i++
+	lB = 1
+	rB = x
+	for lB < rB {
+		prospective := lB + (rB-lB)/2
+		squaredProspective := prospective * prospective
+		switch {
+		case squaredProspective == x:
+			return prospective
+		case squaredProspective > x:
+			rB = prospective
+		case squaredProspective < x:
+			lB = prospective + 1
+		}
 	}
 
-	return result
+	return lB - 1
 }
