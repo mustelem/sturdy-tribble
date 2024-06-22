@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
 	foo := []int{1, 2, 3, 0, 0, 0}
 	card1 := 3
@@ -38,9 +34,7 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 		}
 	}
 
-	fmt.Println(nums1)
-
-	nums1 = retVal
-
-	fmt.Println(nums1)
+	for i, v := range retVal {
+		nums1[i] = v
+	}
 }
