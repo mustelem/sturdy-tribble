@@ -1,19 +1,22 @@
 package main
 
 func isSubsequence(s string, t string) bool {
-	if len(s) > len(t) {
+	lens := len(s)
+	lent := len(t)
+
+	if lens > lent {
 		return false
 	}
 
-	if len(s) == 0 {
+	if lens == 0 {
 		return true
 	}
 
 	var p1 int
 
-	for i := 0; i < len(t); i++ {
+	for i := 0; i < lent; i++ {
 		if s[p1] == t[i] {
-			if p1 < len(s)-1 {
+			if p1 < lens-1 {
 				p1++
 			} else {
 				return true
@@ -21,5 +24,5 @@ func isSubsequence(s string, t string) bool {
 		}
 	}
 
-	return p1 == len(s)
+	return p1 == lens
 }
