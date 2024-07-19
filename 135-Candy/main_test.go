@@ -34,6 +34,13 @@ func Test_candy(t *testing.T) {
 			want: 13,
 		},
 		{
+			name: "my test 0",
+			args: args{
+				ratings: []int{100, 90, 87, 87, 87, 90, 100},
+			},
+			want: 13,
+		},
+		{
 			name: "failed test 2",
 			args: args{
 				ratings: []int{29, 51, 87, 87, 72, 12},
@@ -60,6 +67,13 @@ func Test_candy(t *testing.T) {
 				ratings: []int{2, 3, 4, 5, 2, 3},
 			},
 			want: 13,
+		},
+		{
+			name: "failed test 4",
+			args: args{
+				ratings: []int{1, 2, 3, 5, 4, 3, 2, 1, 4, 3, 2, 1, 3, 2, 1, 1, 2, 3, 4},
+			},
+			want: 47,
 		},
 	}
 	for _, tt := range tests {
