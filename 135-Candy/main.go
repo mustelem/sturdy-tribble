@@ -7,12 +7,11 @@ func candy(ratings []int) int {
 	var size int = len(ratings)
 
 	//Init
-	for i := 0; i < size; i++ {
-		awards[i] = 1
-	}
+	awards[0] = 1
 
 	//Forward pass
 	for i := 1; i < size; i++ {
+		awards[i] = 1
 		if ratings[i] > ratings[i-1] {
 			awards[i] = awards[i-1] + 1
 		}
