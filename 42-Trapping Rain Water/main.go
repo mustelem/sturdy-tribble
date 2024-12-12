@@ -1,20 +1,53 @@
 package main
 
 func trap(height []int) int {
-	var tempAcc, permAcc int
-	var maxHeight int
+	lWall, rWall, trappedWater := false, false, 0
 
-	for _, v := range height {
-		if v < maxHeight {
-			tempAcc += maxHeight - v
-		} else if v > 0 {
+	var l, r int
 
-		} else {
-			permAcc += tempAcc
-			tempAcc = 0
+	var temp []int = make([]int, len(height))
+
+	var left int = 0
+	for i := 0; i < len(height); i++ {
+		h := height[i]
+
+		if i > 0 {
+			left = i - 1
 		}
-		maxHeight = max(v, maxHeight)
+
+		if lWall && h > height[left] {
+			r = i
+			rWall = true
+		}
+
+		if lWall {
+			temp[i] = height[l] - h
+		}
+
+		if lWall && rWall && -l > 1 {
+			minH := min(height[l], height[r])
+
+			for ptr := l + 1; ptr < r; ptr++ {
+				canHoldAdditionally := min(minH-height[ptr], temp[ptr])
+				trappedWater += canHoldAdditionally
+				temp[ptr] -= canHoldAdditionally
+			}
+		}
+
+		// and no temp water
+		if lWall {
+			if h > 0 {
+				l = i
+				lWall = true
+			}
+		} else {
+			if h >= height[l] {
+				l = i
+				lWall = true
+			}
+		}
+
 	}
 
-	return 0
+	return trappedWater
 }
