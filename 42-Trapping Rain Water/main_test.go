@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_trap(t *testing.T) {
 	type args struct {
@@ -12,47 +14,65 @@ func Test_trap(t *testing.T) {
 		want int
 	}{
 		{
-			name: "Should hold 1 unit of water",
+			name: "Test 01",
 			args: args{
 				height: []int{1, 0, 1},
 			},
 			want: 1,
 		}, {
-			name: "Should hold 1 unit of water",
+			name: "Test 02",
 			args: args{
 				height: []int{1, 0, 2},
 			},
 			want: 1,
 		}, {
-			name: "Should hold 1 unit of water",
+			name: "Test 03",
 			args: args{
 				height: []int{2, 0, 1},
 			},
 			want: 1,
 		}, {
-			name: "Should hold 2 unit of water",
+			name: "Test 04",
 			args: args{
 				height: []int{2, 0, 2},
 			},
 			want: 2,
 		}, {
-			name: "Should hold 3 unit of water",
+			name: "Test 05",
 			args: args{
 				height: []int{2, 0, 1, 2},
 			},
 			want: 3,
 		}, {
-			name: "Should hold 6 unit of water",
+			name: "Test 06",
 			args: args{
 				height: []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1},
 			},
 			want: 6,
 		}, {
-			name: "Should hold 9 unit of water",
+			name: "Test 07",
 			args: args{
 				height: []int{4, 2, 0, 3, 2, 5},
 			},
 			want: 9,
+		}, {
+			name: "Test 08",
+			args: args{
+				height: []int{1, 3, 2, 1, 2, 1, 2, 1, 3},
+			},
+			want: 9,
+		}, {
+			name: "Test 09",
+			args: args{
+				height: []int{5, 4, 1, 2},
+			},
+			want: 1,
+		}, {
+			name: "Test 10",
+			args: args{
+				height: []int{5, 4, 1, 1, 2},
+			},
+			want: 2,
 		},
 	}
 	for _, tt := range tests {

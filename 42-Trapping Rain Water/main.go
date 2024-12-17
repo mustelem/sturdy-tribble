@@ -1,50 +1,43 @@
 package main
 
 func trap(height []int) int {
-	lWall, rWall, trappedWater := false, false, 0
-
-	var l, r int
-
+	l, r, trappedWater := 0, 0, 0
 	var temp []int = make([]int, len(height))
 
-	var left int = 0
+	rWall := false
+
 	for i := 0; i < len(height); i++ {
-		h := height[i]
 
-		if i > 0 {
-			left = i - 1
-		}
-
-		if lWall && h > height[left] {
+		// Update right
+		if i > 0 && height[i-1] <= height[i] {
 			r = i
 			rWall = true
 		}
 
-		if lWall {
-			temp[i] = height[l] - h
+		// Calculate possible accumulation
+		if height[i] < height[l] {
+			temp[i] = height[l] - height[i]
 		}
 
-		if lWall && rWall && -l > 1 {
+		// Calculate actual accumulation
+		if rWall && r-l > 1 {
 			minH := min(height[l], height[r])
 
 			for ptr := l + 1; ptr < r; ptr++ {
+				if height[ptr] >= minH {
+					continue
+				}
 				canHoldAdditionally := min(minH-height[ptr], temp[ptr])
 				trappedWater += canHoldAdditionally
 				temp[ptr] -= canHoldAdditionally
+				height[ptr] += canHoldAdditionally
 			}
 		}
 
-		// and no temp water
-		if lWall {
-			if h > 0 {
-				l = i
-				lWall = true
-			}
-		} else {
-			if h >= height[l] {
-				l = i
-				lWall = true
-			}
+		// Update left
+		if i == r && height[l] <= height[i] {
+			l = i
+			rWall = false
 		}
 
 	}
