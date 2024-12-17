@@ -1,2 +1,2 @@
 test:
-	/usr/local/go/bin/go test -timeout 30s -run .
+	/snap/bin/go test -timeout 30s -run .
