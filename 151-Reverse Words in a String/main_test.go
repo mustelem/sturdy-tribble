@@ -11,7 +11,9 @@ func Test_reverseWords(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{name: "Ex01", args: args{s: "the sky is blue"}, want: "blue is sky the"},
+		{name: "Ex02", args: args{s: "  hello world  "}, want: "world hello"},
+		{name: "Ex03", args: args{s: "a good   example"}, want: "example good a"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
