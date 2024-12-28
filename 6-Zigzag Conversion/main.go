@@ -10,20 +10,19 @@ func convert(s string, numRows int) string {
 	var buffer bytes.Buffer
 	letters := strings.Split(s, "")
 
-	i := 0
 	width := numRows + max(0, numRows-2)
 	diff := width
 
 	for j := 0; j < numRows; j++ {
-		i = j
-		buffer.WriteString(letters[i])
+		i := j
 
-		diff = width - max(0, 2*j)
+		diff = width - 2*j
 		if diff == 0 {
 			diff = width - diff
 		}
-		for i+diff < len(letters) {
-			buffer.WriteString(letters[i+diff])
+
+		for i < len(letters) {
+			buffer.WriteString(letters[i])
 			i += diff
 
 			diff = width - diff
@@ -31,6 +30,7 @@ func convert(s string, numRows int) string {
 				diff = width - diff
 			}
 		}
+
 	}
 
 	return buffer.String()
