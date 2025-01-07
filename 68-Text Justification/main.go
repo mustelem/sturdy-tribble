@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 )
 
 func fullJustify(words []string, maxWidth int) []string {
-	var result []string = make([]string, 150)
+	var result []string = make([]string, 20)
 	var resPtr int = 0
 	var start int = 0
 	var lastline bool
@@ -59,7 +60,7 @@ func justifyLine(s string, i int, lastLine bool) string {
 	var extraSpace int = i - len(s)
 	var words []string = strings.Split(s, " ")
 	var places int = len(words) - 1
-	var spacers []strings.Builder = make([]strings.Builder, 100)
+	var spacers []strings.Builder = make([]strings.Builder, 20)
 
 	for i := 0; i < places; i++ {
 		spacers[i].WriteString(" ")
@@ -92,4 +93,13 @@ func justifyLine(s string, i int, lastLine bool) string {
 	}
 
 	return result.String()
+}
+
+func main() {
+	var input []string = []string{"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"}
+	var output []string = fullJustify(input, 20)
+
+	for _, v := range output {
+		fmt.Printf("\"%s\"\n", v)
+	}
 }
