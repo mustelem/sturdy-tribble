@@ -1,48 +1,47 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
 func fullJustify(words []string, maxWidth int) []string {
-	var result []string = make([]string, 300)
-	resPtr := 0
-	start := 0
+	var result []string = make([]string, 150)
+	var resPtr int = 0
+	var start int = 0
 	var lastline bool
 
 	for {
 		// intake(words []string, maxWidth int) string
-		remaining := maxWidth
-		payload := ""
+		var remaining int = maxWidth
+		var payload strings.Builder
+
 		for i := start; i < len(words); i++ {
 			start = i
 			var sizeNextPart int
-			if len(payload) > 0 {
+			if len(payload.String()) > 0 {
 				sizeNextPart = 1 + len(words[i])
 			} else {
 				sizeNextPart = len(words[i])
 			}
 			if sizeNextPart <= remaining {
 				if remaining < maxWidth {
-					payload += " "
+					payload.WriteString(" ")
 					remaining -= 1
 				}
-				payload += words[i]
+				payload.WriteString(words[i])
 				remaining -= len(words[i])
 				start++
 			} else {
 				break
 			}
 		}
+
 		// justify line
 		if start == len(words) {
 			lastline = true
 		}
-		var resul string
-		// fmt.Println("payload:", payload)
-		resul = justifyLine(payload, maxWidth, lastline)
-		fmt.Println("result :", "\""+resul+"\"")
+
+		var resul string = justifyLine(payload.String(), maxWidth, lastline)
 
 		//add to result array here
 		result[resPtr] = resul
@@ -57,16 +56,13 @@ func fullJustify(words []string, maxWidth int) []string {
 }
 
 func justifyLine(s string, i int, lastLine bool) string {
-	extraSpace := i - len(s)
-	var result string
-
-	words := strings.Split(s, " ")
-	places := len(words) - 1
-
-	var spacers []string = make([]string, 100)
+	var extraSpace int = i - len(s)
+	var words []string = strings.Split(s, " ")
+	var places int = len(words) - 1
+	var spacers []strings.Builder = make([]strings.Builder, 100)
 
 	for i := 0; i < places; i++ {
-		spacers[i] = " "
+		spacers[i].WriteString(" ")
 	}
 
 	if places < 1 {
@@ -74,29 +70,26 @@ func justifyLine(s string, i int, lastLine bool) string {
 	}
 
 	for i := 0; i < extraSpace; i++ {
-		spacers[i%places] += " "
+		spacers[i%places].WriteString(" ")
 	}
 
-	result += words[0]
+	var result strings.Builder
+	result.WriteString(words[0])
 	for i := 0; i < places; i++ {
-		result += spacers[i]
+		result.WriteString(spacers[i].String())
 		if len(words) > 1 {
-			result += words[i+1]
+			result.WriteString(words[i+1])
 		}
 	}
 
 	if lastLine {
-		spacer := ""
+		var spacer strings.Builder
+		spacer.WriteString(s)
 		for i := 0; i < extraSpace; i++ {
-			spacer += " "
+			spacer.WriteString(" ")
 		}
-		return s + spacer
+		return spacer.String()
 	}
 
-	return result
-}
-
-func main() {
-	words := []string{"Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do"}
-	fullJustify(words, 20)
+	return result.String()
 }
