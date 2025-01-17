@@ -17,6 +17,7 @@ func Test_groupAnagrams(t *testing.T) {
 		{name: "Ex01", args: args{strs: []string{"eat", "tea", "tan", "ate", "nat", "bat"}}, want: [][]string{{"bat"}, {"nat", "tan"}, {"ate", "eat", "tea"}}},
 		{name: "Ex02", args: args{strs: []string{""}}, want: [][]string{{""}}},
 		{name: "Ex03", args: args{strs: []string{"a"}}, want: [][]string{{"a"}}},
+		{name: "Ex04", args: args{strs: []string{"cab", "tin", "pew", "duh", "may", "ill", "buy", "bar", "max", "doc"}}, want: [][]string{{"max"}, {"buy"}, {"doc"}, {"may"}, {"ill"}, {"duh"}, {"tin"}, {"bar"}, {"pew"}, {"cab"}}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
